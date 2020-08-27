@@ -16,11 +16,11 @@ library(readr)
 import.POLTIPS <- function(x){
   
   # read in text file
-  a <- read_delim(x, " ",                                                  # read in .txt file x, deliminated by white space
+  a <- read_table2(x,                                                      # read in .txt file
                   col_names = FALSE,                                       # dont use first row as column names
-                  col_types = cols(X2 = col_skip(), X3 = col_character(),  # skip column X2, read column X3 (time) as character
-                                   X4 = col_skip(), X5 = col_skip(),       # skip columns X4 and X5
-                                   X6 = col_skip(), X7 = col_number()),    # skip column X6, read column X7 (tide height) as number
+                  col_types = cols(X1 = col_date(format = "%d/%m/%Y"),     # date column with format
+                                   X2 = col_time(format = "%H:%M"),        # time column with format
+                                   X3 = col_number()),                     # tidal height as numeric
                   skip = 1)                                                # skip row one of plain text
   
   # convert to relevant format
